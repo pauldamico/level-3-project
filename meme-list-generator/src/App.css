@@ -64,12 +64,19 @@ border-radius: 10px;
   .get-meme-button{
     font-size: 20px;
     color: white;
-    grid-row: 4/6;
-    grid-column: 2/5;
+    grid-row: 4/7;
+    grid-column: 4/5;
     border-radius: 10px;
     background-color: blueviolet;
   }
-
+.new-image{
+  font-size: 20px;
+  color: white;
+  grid-row: 4/7;
+  grid-column: 2/3;
+  border-radius: 10px;
+  background-color: blueviolet;
+}
   .meme-img{
     width: 100%;
     height: 100%;
