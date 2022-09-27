@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Nav from './components/Nav'
 import './App.css'
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
 
   return (
     <div className="app">
-
+<Nav/>
     </div>
   )
 }
