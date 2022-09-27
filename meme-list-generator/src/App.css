@@ -7,36 +7,87 @@ body{
   margin-left: 40px;
 }
 .app{
+  background-color: #000;
   margin-top: 30px;
   width:600px;
-  height:800px;
+  height:600px;
   border:1px solid black;
 }
 .nav{
+  color: white;
   padding: 5px;
-  background-color: greenyellow;
+  background-color: blueviolet;
   font-size: 15px;
   height:40px;
   box-shadow: 0px 3px 3px 2px black;
   display: flex;
   justify-content: space-around;
   align-items: center;
-
 }
 nav>h2{
-
 text-align: left;
 margin-left:10px;
-
 }
 nav>h3{
   font-size: 14px;
   text-align: right;
-  margin-right:10px;
- 
+  margin-right:10px; 
 }
-
 .troll-face{
 height:20px;
 margin-right:10px;
 }
+
+.form{
+  display: grid;
+
+  grid-template-columns: 45px 250px 10px 250px 45px;
+  grid-template-rows: repeat(24, 27px);
+  
+ 
+}
+.left-input{
+grid-column: 2/3;
+grid-row: 2/3;
+border-radius: 10px;
+}
+.right-input{
+  grid-column: 4/5;
+  grid-row: 2/3;
+  border-radius: 10px;
+  }
+
+  .get-meme-button{
+    font-size: 20px;
+    color: white;
+    grid-row: 4/6;
+    grid-column: 2/5;
+    border-radius: 10px;
+    background-color: blueviolet;
+  }
+
+  .meme-img{
+    width: 100%;
+    height: 100%;
+   border: 1px solid black;
+    grid-row: 8/19;
+    grid-column: 2/5;
+  }
+
+  .top-text{
+    font-size: 40px;
+    text-align: center;
+    grid-row: 9/10;
+    grid-column: 2/5;
+    color: #fff;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+  }
+
+  .bottom-text{
+    font-size: 40px;
+    text-align: center;
+    grid-row: 17/18;
+    grid-column: 2/5;
+    color: #fff;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+  }
