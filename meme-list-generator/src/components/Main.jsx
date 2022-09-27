@@ -1,16 +1,70 @@
-import memeimg from "../images/memeimg.png"
+import React, { useState, useEffect } from "react";
+import memeimg from "../images/memeimg.png";
+import axios from "axios"
+import { nanoid } from "nanoid";
 
 export default function Main() {
+  const [meme, setMeme] = useState({ id:nanoid(), leftInput: "", rightInput: "", img: "" });
+  const [listMeme, setListMeme] = useState([])
+
+useEffect(()=>{
+axios.get("https://api.imgflip.com/get_memes")
+.then(res=>setMeme(prev=>({...prev, img:res.data.data.memes[Math.floor(Math.random(randomIndex) * 100)].url})))
+.catch(err=>console.log(err))
+},[listMeme])
+
+function randomIndex (){
+    Math.floor(Math.random() * 100)  
+}
+
+  const changeHandler = (e) => {
+    const {value, name} = e.target
+    setMeme(prev=>({...prev, [name]:value, id:nanoid()}))
+  
+  };
+
+  const submitHandler = (e)=>{ 
+    e.preventDefault()
+   
+    setListMeme(prev=>([...prev, {...meme}]))
+    console.log(listMeme)
+    setMeme(prev=>({...prev, leftInput:"", rightInput:""}))
+  }
+
+const listMemes = listMeme.map(item=><div className="div-list"> <img src={item.img} className="meme-img-list" />
+<h1 className="top-text-list">{item.leftInput}</h1>
+<h1 className="bottom-text-list">{item.rightInput}</h1></div>)
+
   return (
+ <div>
     <div className="main-div">
-      <form className="form">
-        <input className="left-input" />
-        <input className="right-input" />
-        <button className="get-meme-button">Get a new meme image</button>   
-        <img src={memeimg} className="meme-img" />
-        <h1 className="top-text">Shut Up</h1>
-        <h1 className="bottom-text">And take my money</h1>
-        </form>
+      <form onSubmit={submitHandler} className="form">
+        <input
+          value={meme.leftInput}
+          type="text"
+          onChange={changeHandler}
+          name="leftInput"
+          className="left-input"
+        />
+        <input
+          value={meme.rightInput}
+          type="text"
+          onChange={changeHandler}
+          name="rightInput"
+          className="right-input"
+        />
+        <button className="get-meme-button">Get a new meme image</button>
+        <img src={meme.img} className="meme-img" />
+        <h1 className="top-text">{meme.leftInput}</h1>
+        <h1 className="bottom-text">{meme.rightInput}</h1>
+      </form>
+      
+   
     </div>
+    <ul className="ul-list">
+      {listMemes}
+        </ul>
+    </div>
+ 
   );
 }
