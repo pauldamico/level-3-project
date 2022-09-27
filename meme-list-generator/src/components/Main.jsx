@@ -23,22 +23,31 @@ function randomIndex (){
   
   };
 
+  const getNewImage = () =>{
+    axios.get("https://api.imgflip.com/get_memes")
+    .then(res=>setMeme(prev=>({...prev, img:res.data.data.memes[Math.floor(Math.random(randomIndex) * 100)].url})))
+.catch(err=>console.log(err))
+  }
+
   const submitHandler = (e)=>{ 
     e.preventDefault()
    
     setListMeme(prev=>([...prev, {...meme}]))
     console.log(listMeme)
-    setMeme(prev=>({...prev, leftInput:"", rightInput:""}))
+    setMeme(prev=>({...prev, leftInput:"", rightInput:"", id:nanoid()}))
   }
 
-const listMemes = listMeme.map(item=><div className="div-list"> <img src={item.img} className="meme-img-list" />
+const listMemes = listMeme.map(item=><div key = {item.id}className="div-list"> <img src={item.img} className="meme-img-list" />
 <h1 className="top-text-list">{item.leftInput}</h1>
 <h1 className="bottom-text-list">{item.rightInput}</h1></div>)
+
+const reverseList = listMemes.reverse()
 
   return (
  <div>
     <div className="main-div">
       <form onSubmit={submitHandler} className="form">
+        <button className="new-image" type ="button" onClick={getNewImage}>Get New Image</button>
         <input
           value={meme.leftInput}
           type="text"
@@ -53,7 +62,7 @@ const listMemes = listMeme.map(item=><div className="div-list"> <img src={item.i
           name="rightInput"
           className="right-input"
         />
-        <button className="get-meme-button">Get a new meme image</button>
+        <button className="get-meme-button">Save Meme To List</button>
         <img src={meme.img} className="meme-img" />
         <h1 className="top-text">{meme.leftInput}</h1>
         <h1 className="bottom-text">{meme.rightInput}</h1>
@@ -62,7 +71,7 @@ const listMemes = listMeme.map(item=><div className="div-list"> <img src={item.i
    
     </div>
     <ul className="ul-list">
-      {listMemes}
+      {reverseList}
         </ul>
     </div>
  
