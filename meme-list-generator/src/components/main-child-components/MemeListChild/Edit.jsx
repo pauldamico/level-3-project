@@ -1,3 +1,5 @@
+
+
 export default function Edit (props){
 
     
@@ -7,13 +9,13 @@ export default function Edit (props){
       <input
         value={props.leftInputList}
         type="text"
-        onChange={props.onChange}
+        onChange={props.editChangeHandler}
         name="leftInputList"
         className="top-text-list-input"
       />
      <input   value={props.rightInputList}
             type="text"
-            onChange={props.onChange}
+            onChange={props.editChangeHandler}
             name="rightInputList"
             className="bottom-text-list-input"/>
             

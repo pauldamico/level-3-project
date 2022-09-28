@@ -1,6 +1,17 @@
+import React, {useState} from "react";
 import Edit from "./MemeListChild/Edit";
-
 export default function MemeList(props) {
+
+  const [edit, setEdit] = useState({
+    leftInputList: "",
+    rightInputList: "",
+    img: ""
+  });
+
+  const editChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setEdit((prev) => ({ ...prev, [name]: value }));
+  };
  
   return (
     <div className="div-list">
@@ -14,7 +25,7 @@ export default function MemeList(props) {
       </button>
       <button
         onClick={() => {
-          props.editMeme(props.id);
+          props.editMeme(props.id, edit.leftInputList, edit.rightInputList);
         }}
         className="edit"
       >
@@ -26,6 +37,8 @@ export default function MemeList(props) {
 
       {props.edit && (
         <Edit
+        editChangeHandler={editChangeHandler}
+        editMeme={props.editMeme}
         id={props.id}
         editGetNewImage={props.editGetNewImage}
           leftInputList={props.leftInputList}

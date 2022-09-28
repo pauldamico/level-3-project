@@ -13,11 +13,7 @@ export default function Main() {
     edit: false,
   });
   const [listMeme, setListMeme] = useState([]);
-  const [edit, setEdit] = useState({
-    leftInputList: "",
-    rightInputList: "",
-    img: ""
-  });
+
 
 
 
@@ -33,18 +29,7 @@ export default function Main() {
       )
       .catch((err) => console.log(err));
   }, []);
-  useEffect(() => {
-    axios
-      .get("https://api.imgflip.com/get_memes")
-      .then((res) =>
-        setEdit((prev) => ({
-          ...prev,
-          img: res.data.data.memes[Math.floor(Math.random(randomIndex) * 100)]
-            .url,
-        }))
-      )
-      .catch((err) => console.log(err));
-  }, []);
+
   function randomIndex() {
     Math.floor(Math.random() * 100);
   }
@@ -69,14 +54,14 @@ export default function Main() {
       .catch((err) => console.log(err));
  console.log(id)
   };
-  const editMeme = (id) => {    
+  const editMeme = (id, left, right) => {    
     setListMeme((prev) =>
       prev.map((item) =>
         item.id === id
           ? {
               ...item,
-              leftInput: edit.leftInputList,
-              rightInput: edit.rightInputList,                       
+              leftInput: left,
+              rightInput: right,                       
               edit: !item.edit,
             }
           : { ...item }
@@ -85,12 +70,9 @@ export default function Main() {
 
 
     
-    setEdit((prev) => ({ ...prev, leftInputList: "", rightInputList: "" }));
+    // setEdit((prev) => ({ ...prev, leftInputList: "", rightInputList: "" }));
   };
-  const editChangeHandler = (e) => {
-    const { name, value } = e.target;
-    setEdit((prev) => ({ ...prev, [name]: value }));
-  };
+ 
 
   ////////////////////////////
   const getNewImage = () => {
@@ -128,10 +110,8 @@ export default function Main() {
       key={item.id}
       {...item}
       removeMeme={removeMeme}
-      editMeme={editMeme}
-      leftInputList={edit.leftInputList}
-      onChange={editChangeHandler}
-      rightInputList={edit.rightInputList}
+      editMeme={editMeme}     
+ 
     />
   ));
 
