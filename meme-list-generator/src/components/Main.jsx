@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import MemeList from "./main-child-components/MemeList";
+import MemeList from "./main-child-components/Meme";
 import MemeTop from "./main-child-components/MemeTop";
 import axios from "axios";
 import { nanoid } from "nanoid";
