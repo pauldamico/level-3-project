@@ -14,9 +14,7 @@ export default function Main() {
   const [listMeme, setListMeme] = useState([]);
   const [edit, setEdit] = useState({   
     leftInputList: "",
-    rightInputList: "",
-   
-  
+    rightInputList: ""  
   });
 
   useEffect(() => {
